@@ -3284,17 +3284,55 @@ $(function () {
   });
 });
 $(function () {
-  $(document).on('click', '#flexRadioDefault1', function () {
-    var eventsId = new Array();
-    $('.card').each(function () {
+  $(document).on('click', '#fromCreated', function () {
+    var eventsId = [];
+    $.each($('.card'), function () {
       eventsId.push($(this).data('id'));
     });
-
-    if (eventsId[0] === undefined) {
-      eventsId.shift();
-    }
-
-    console.log(eventsId);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/sort/creation",
+      data: {
+        ids: eventsId
+      },
+      success: function success(data) {
+        $('.card-holder').html('');
+        $.each(data, function () {
+          $('.card-holder').append(" \n                  <div class=\"col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-3 my-3 d-flex\">\n                     <div class=\"card\" data-id=\"" + this.id + "\" style=\"width: 18rem;\">\n                        <div class=\"card-body\">\n                           <h5 class=\"card-title\">Evento:</h5>\n                           <p class=\"card-text card-name data-value=\"" + this.name + "\">" + this.name + "</p>\n                        </div>\n                        <ul class=\"list-group list-group-flush\">\n                           <li class=\"list-group-item card-description\">Descrizione: " + this.description + "</li>\n                           <li class=\"list-group-item card-date data-value=\"" + this.date + "\">Data evento: " + this.date + "</li>\n                        </ul>\n                        <button class=\"btn btn-primary card-clipboard\">Copia Data</button>\n                     </div>\n                  </div>");
+        });
+      },
+      error: function error(jqXHR, textStatus, errorThrown) {
+        console.log("funzione chiamata quando la chiamata fallisce", jqXHR, textStatus, errorThrown);
+      }
+    });
+  });
+  $(document).on('click', '#fromHappened', function () {
+    var eventsId = [];
+    $.each($('.card'), function () {
+      eventsId.push($(this).data('id'));
+    });
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: "POST",
+      url: "/sort/happened",
+      data: {
+        ids: eventsId
+      },
+      success: function success(data) {
+        $('.card-holder').html('');
+        $.each(data, function () {
+          $('.card-holder').append(" \n                  <div class=\"col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-3 my-3 d-flex\">\n                     <div class=\"card\" data-id=\"" + this.id + "\" style=\"width: 18rem;\">\n                        <div class=\"card-body\">\n                           <h5 class=\"card-title\">Evento:</h5>\n                           <p class=\"card-text card-name data-value=\"" + this.name + "\">" + this.name + "</p>\n                        </div>\n                        <ul class=\"list-group list-group-flush\">\n                           <li class=\"list-group-item card-description\">Descrizione: " + this.description + "</li>\n                           <li class=\"list-group-item card-date data-value=\"" + this.date + "\">Data evento: " + this.date + "</li>\n                        </ul>\n                        <button class=\"btn btn-primary card-clipboard\">Copia Data</button>\n                     </div>\n                  </div>");
+        });
+      },
+      error: function error(jqXHR, textStatus, errorThrown) {
+        console.log("funzione chiamata quando la chiamata fallisce", jqXHR, textStatus, errorThrown);
+      }
+    });
   });
 });
 

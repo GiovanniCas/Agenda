@@ -53,24 +53,7 @@ class EventController extends Controller
         return redirect( route("welcome", compact('events')));
     }
 
-   /*  public function search(Request $request){
-        
-        $q = $request->input('q');
-        $start = $request->input('start');
-        $end = $request->input('end');
-        if((!is_null($q)) && (is_null($start) || is_null($end))){
-            $events = Event::where('name','LIKE','%'.$q.'%')->orderBy('created_at' , 'desc')->get();
-        } elseif((is_null($q)) && (!is_null($start) && !is_null($end))){
-            $events = Event::whereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
-        }
-        else {
-            $events = Event::where('name','LIKE','%'.$q.'%')->orWhereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
-        }
-        
 
-        return view ('welcome' , compact('events'))->with('message');
-        }
-    } */
     public function search(Request $request){
         
         $q = $request->name;
@@ -85,18 +68,32 @@ class EventController extends Controller
                     $event = Event::whereRaw('DATE_FORMAT(date , \'%m-%d\') BETWEEN DATE_FORMAT( \'' .$start. '\', \'%m-%d\') AND DATE_FORMAT( \'' .$end. '\'  , \'%m-%d\')')->orderBy('created_at' , 'desc')->get();
                 }
             }
-            /* $events[] = DB::table('events')
-                           ->select('*') */
-                           /* ->whereRaw('DATE_FORMAT(date , \'%m-%d\') BETWEEN DATE_FORMAT(\'' .$start. '\' , \'%m-%d\') AND DATE_FORMAT(\'' .$end. '\' , \'%m-%d\')') */
-                  /*          ->whereRaw('DATE_FORMAT(date , \'%m-%d\') BETWEEN DATE_FORMAT( "2023-07-11" , \'%m-%d\') AND DATE_FORMAT( "2023-07-30" , \'%m-%d\')')
-                           ->where('periodic' , 1)
-                           ->orderBy('created_at' , 'desc')->get(); */
         } 
         else {
             $events = Event::where('name','LIKE','%'.$q.'%')->orWhereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
         }
-        /* return view ('welcome' , compact('events'))->with('message'); */
+        
 
+        return response()->json($events);
+    }
+
+    public function sortByCreation(Request $request){
+        $events = [];
+        $ids = $request->ids;
+        if(!is_null($ids)){
+            $events = Event::whereIn('id', $ids )->orderBy('created_at' , 'desc')->get();
+          
+        }
+        return response()->json($events);
+    }
+
+    public function sortByHappened(Request $request){
+        $events = [];
+        $ids = $request->ids;
+        if(!is_null($ids)){
+            $events = Event::whereIn('id', $ids )->orderBy('date' , 'desc')->get();
+          
+        }
         return response()->json($events);
     }
 

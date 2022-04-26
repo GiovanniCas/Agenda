@@ -23,3 +23,8 @@ Route::post('/event/store' , [EventController::class , "store"])->name('store');
 //RICERCA PERE NOME
 Route::post('/search' , [EventController::class , "search"])->name('search');
 
+//ORDINA PER DATA
+Route::post('/sort/creation' , [EventController::class , "sortByCreation"])->name('sortByCreation');
+Route::post('/sort/happened' , [EventController::class , "sortByHappened"])->name('sortByHappened');
+
+

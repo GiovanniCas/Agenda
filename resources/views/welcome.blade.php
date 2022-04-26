@@ -16,7 +16,7 @@
         <div class="row d-flex ">
             <div  class="col-12 col-md-6 col-lg-4 col-xl-3 ">
                 <div class="col-12 d-flex flex-direction-column">
-                    <div class="card shadow-2-strong" style="border-radius: 1rem; height:500px">
+                    <div class="box shadow-2-strong" style="border-radius: 1rem; height:500px">
                         <div class="card-body p-5 text-center">
                             <form method="POST" action="{{route("store")}}">
                                 @csrf
@@ -74,16 +74,16 @@
                                         <div class="accordion-body">
                                             <div class="box wide">
                                                 <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="fromCreated" checked>
-                                                <label class="form-check-label" for="flexRadioDefault1" >
-                                                    Data creazione
-                                                </label>
-                                                </div>
-                                                <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="fromHappened">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Data scadenza
-                                                </label>
+                                                    <input class="form-check-input" type="radio" name="order" id="fromCreated" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault1" >
+                                                        Data creazione
+                                                    </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="order" id="fromHappened">
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Data evento
+                                                    </label>
                                                 </div>
                                             </div>
                                           
@@ -150,15 +150,20 @@
     <script src="{{asset("js/app.js")}}"></script>
     <script type="text/javascript">
         const events = @json($events);
-        const nextEvents = events.filter(event=>{
-            return moment(event.date, 'YYYY-MM-DD').isBetween(moment().add(-1, 'days') ,  moment().add(30, 'days'))
-        }).sort((eventA, eventB) => moment(eventA.date, 'YYYY-MM-DD').isAfter(moment(eventB.date, 'YYYY-MM-DD') ) ? 1 : -1)
+        /* const nextEvents = events.filter(event=>{
+            return moment(event.date, 'YYYY-MM-DD').isBetween(moment().subtract(1, 'days') ,  moment().add(30, 'days'))
+        }).sort((eventA, eventB) => moment(eventA.date, 'YYYY-MM-DD').isAfter(moment(eventB.date, 'YYYY-MM-DD') ) ? 1 : -1) */
+        const nextEvents = events.filter(alertFilter).sort((eventA, eventB) => moment(eventA.date, 'YYYY-MM-DD').isAfter(moment(eventB.date, 'YYYY-MM-DD') ) ? 1 : -1)
+        console.log(nextEvents);
+        
         if(nextEvents.length){
             const nextEvent = nextEvents[0]
             alert( nextEvent.name + ' ' +  nextEvent.description  + ' ' + nextEvent.date )
         }
-        let eventCreated = event
 
+        function alertFilter(event){
+            return moment(event.date, 'YYYY-MM-DD').isBetween(moment().subtract(2, 'days') ,  moment().add(30, 'days'))
+        }
     </script>
     
 </body>
