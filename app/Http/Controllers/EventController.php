@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\EventRequest;
 use Symfony\Component\Console\Input\Input;
 
 class EventController extends Controller
@@ -35,12 +36,14 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
+        
         $periodic = 0 ; 
         if($request->input('periodic')){
             $periodic = 1;
         };
+        
         Event::create([
             'name'=>$request->input("name"),
             'description'=>$request->input("description"),
@@ -48,8 +51,10 @@ class EventController extends Controller
             'periodic'=>$periodic,
         ]);
 
-        $events=Event::orderBy('created_at' , 'desc')->get();
+       
 
+        $events=Event::orderBy('created_at' , 'desc')->get();
+        
         return redirect( route("welcome", compact('events')));
     }
 

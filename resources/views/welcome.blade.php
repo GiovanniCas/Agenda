@@ -11,7 +11,7 @@
     
 </head>
 <body>
-    
+
     <div class="container-fluid">
         <div class="row d-flex ">
             <div  class="col-12 col-md-6 col-lg-4 col-xl-3 ">
@@ -24,15 +24,15 @@
                                 
                                 <div class="mb-3 my-5">
                                     <label for="eventName" class="form-label">Nome Evento</label>
-                                    <input type="text" class="form-control" aria-describedby="emailHelp" name="name" value="{{old("product")}}">
+                                    <input type="text" class="form-control" aria-describedby="emailHelp" name="name" value="{{old("product")}}" required>
                                 </div>
                                 <div >
                                     <label for="description" class="form-label">Descrizione</label>
-                                    <textarea type="text" name="description"cols="55" rows="3" class="form-control" value="{{old("description")}}"></textarea> <br>
+                                    <textarea type="text" name="description"cols="55" rows="3" class="form-control" value="{{old("description")}}" required></textarea> <br>
                                 </div>
                                 <div class="form-group">
                                     <label class="active" for="expireDate">Data Evento</label>
-                                    <input type="date" id="expireDate" name="date">
+                                    <input type="date" id="expireDate" name="date" required>
                                     <label for="eventPeriodic" class="form-label mt-3">Vuoi ripetere l'evento ogni anno?</label>
                                     <input type="checkbox"  name="periodic">
                                 </div>
@@ -41,6 +41,7 @@
                         </div>
                     </div>
                 </div> 
+                
                 <div class="row mt-5">
                    
                         <div class="form-events-filter">
@@ -106,8 +107,8 @@
                                                 <input name="start" style="width: 100%;" type="date"/>
                                                 <h5 style="margin-top: 1em">Fine</h5>
                                                 <input name="end" style="width: 100%;" type="date"/>
-                                                <label for="ignoreDate" class="form-label mt-3">Ignora anno</label>
-                                                <input type="checkbox"  name="ignore">
+                                                <!-- <label for="ignoreDate" class="form-label mt-3">Ignora anno</label>
+                                                <input type="checkbox"  name="ignore"> -->
                                             </div>
                                         </div>
                                     </div>
