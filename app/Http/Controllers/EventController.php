@@ -36,7 +36,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventRequest $request)
+    public function store(Request $request)
     {
         
         $periodic = 0 ; 
@@ -143,8 +143,10 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroyEvent(Event $event)
     {
-        //
+        $event->delete();
+       
+        return redirect(route("welcome"));
     }
 }

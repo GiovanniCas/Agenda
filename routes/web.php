@@ -28,3 +28,6 @@ Route::post('/sort/creation' , [EventController::class , "sortByCreation"])->nam
 Route::post('/sort/happened' , [EventController::class , "sortByHappened"])->name('sortByHappened');
 
 
+//ELIMINA EVENTO
+Route::delete('/event/destroy/{event}' , [EventController::class , "destroyEvent"])->name('destroyEvent');
+
