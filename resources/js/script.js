@@ -81,7 +81,6 @@ $(function() {
                         </div>
                         <div class="solu_title card-box" data-id="`+ this.id +`">
                         <h3 class="card-text card-name" data-value="`+ this.name +`">`+ this.name + `</h3>
-                        </div>
                         <div class="solu_description">
                         <p class="card-description">
                         `+ this.description + `
@@ -90,6 +89,7 @@ $(function() {
                         `+ this.date + `
                         </p>
                         <button type="button" class="read_more_btn card-clipboard">Copia data</button>
+                        </div>
                         </div>
                      </div>
                   </div>
@@ -112,7 +112,7 @@ $(function() {
       console.log(copyName);
       let copyDate = $(this).parents('.card-box').find('.card-date');
       
-      navigator.clipboard.writeText(copyName.data('value') + ' - ' +copyDate.data('value'));
+      navigator.clipboard.writeText(copyName.data('value') + ' - ' + copyDate.data('value'));
    
    });
 })
@@ -186,7 +186,6 @@ $(function(){
                      </div>
                      <div class="solu_title card-box" data-id="`+ this.id +`">
                      <h3 class="card-text card-name" data-value="`+ this.name +`">`+ this.name + `</h3>
-                     </div>
                      <div class="solu_description">
                      <p class="card-description">
                      `+ this.description + `
@@ -195,6 +194,7 @@ $(function(){
                      `+ this.date + `
                      </p>
                      <button type="button" class="read_more_btn card-clipboard">Copia data</button>
+                     </div>
                      </div>
                   </div>
                </div>
@@ -275,7 +275,6 @@ $(function(){
                      </div>
                      <div class="solu_title card-box" data-id="`+ this.id +`">
                      <h3 class="card-text card-name" data-value="`+ this.name +`">`+ this.name + `</h3>
-                     </div>
                      <div class="solu_description">
                      <p class="card-description">
                      `+ this.description + `
@@ -284,6 +283,7 @@ $(function(){
                      `+ this.date + `
                      </p>
                      <button type="button" class="read_more_btn card-clipboard">Copia data</button>
+                     </div>
                      </div>
                   </div>
                </div>

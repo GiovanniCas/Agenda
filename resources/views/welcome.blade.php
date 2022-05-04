@@ -15,14 +15,14 @@
     <div class="container-fluid">
         <div class="row d-flex ">
             <div  class="col-12 col-md-4 col-xl-3 ">
-                <div class="col-12 d-flex flex-direction-column">
+                <div class="col-12 d-flex flex-direction-column justify-content-center">
                     <div class="box shadow-2-strong" style="border-radius: 1rem; height:500px">
                         <div class="card-body p-5 text-center">
                             <form method="POST" action="{{route("store")}}">
                                 @csrf
                                 <h3>Evento</h3>
                                 
-                                <div class="mb-3 my-5">
+                                <div class="mb-3 my-3">
                                     <label for="eventName" class="form-label">Nome Evento</label>
                                     <input type="text" class="form-control" aria-describedby="emailHelp" name="name" value="{{old("product")}}" required>
                                 </div>
@@ -36,7 +36,7 @@
                                     <label for="eventPeriodic" class="form-label mt-3">Vuoi ripetere l'evento ogni anno?</label>
                                     <input type="checkbox"  name="periodic">
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3">Aggiungi</button>
+                                <button type="submit" class="btn my-background text-light mt-3">Aggiungi</button>
                             </form>   
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                         <div class="accordion-body">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="q"
-                                                    placeholder="Search users"> <span class="input-group-btn">
+                                                    placeholder="Cerca nome evento"> <span class="input-group-btn">
                                                     <!-- <button type="submit" class="btn btn-default">
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button> -->
@@ -117,13 +117,14 @@
                         </div>
                    
                 </div>
-              
-                <button class="btn btn-primary mt-3 form-events-filter-submit">Cerca</button>
+                <div class="accordion-item" style="height : 52px;">
+                    <button class="btn form-events-filter-submit text-light" style="margin-left: 18px; margin-top: 7px; background: rgb(32, 173, 220);">Cerca</button>
+                </div>
             </div>
-           
         
             <div class="col-12 col-md-8 col-xl-9">
                 <div class="row card-holder">
+                    <h1 class="mt-3">Eventi In Programma:</h1>
                     @foreach($events as $event)
                         <div class="col-12 col-sm-6 col-xl-4 col-xxl-3 my-3 d-flex solution-card-container" >
                         <div class="solution_cards_box">
@@ -175,21 +176,21 @@
                                 </div>
                                 <div class="solu_title card-box" data-id="{{$event->id}}">
                                     <h3 class="card-text card-name" data-value="{{$event->name}}">{{$event->name}}</h3>
-                                </div>
-                                <div class="solu_description">
-                                    <p class="card-description">
-                                        {{$event->description}}
-                                    </p>
-                                    <p class="card-date" data-value="{{$event->date}}"> 
-                                        {{$event->date}}
-                                    </p>
-                                    <div class="d-flex justify-content-between">
-                                        <button type="button" class="read_more_btn card-clipboard">Copia data</button>
-                                        <form method="POST" action="{{route('destroyEvent', compact('event'))}}">
-                                            @csrf 
-                                            @method("delete")
-                                            <button  href="{{route("destroyEvent", compact("event"))}}" class="delete_button">Elimina</button>
-                                        </form>
+                                    <div class="solu_description">
+                                        <p class="card-description">
+                                            {{$event->description}}
+                                        </p>
+                                        <p class="card-date" data-value="{{$event->date}}"> 
+                                            {{$event->date}}
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="read_more_btn card-clipboard">Copia data</button>
+                                            <form method="POST" action="{{route('destroyEvent', compact('event'))}}">
+                                                @csrf 
+                                                @method("delete")
+                                                <button  href="{{route("destroyEvent", compact("event"))}}" class="delete_button">Elimina</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
