@@ -84,7 +84,7 @@ class EventController extends Controller
         $end = $request->end;
         if((!is_null($q)) && (is_null($start) || is_null($end)) && (!is_null($ids))){
             $events = Event::where('name','LIKE','%'.$q.'%')->orderBy('created_at' , 'desc')->get();
-        } elseif((is_null($q)) && (!is_null($start) && !is_null($end))){
+        } elseif((is_null($q)) && (!is_null($start) && !is_null($end)) && (!is_null($ids))){
             $events = Event::whereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
         }
         else {
@@ -109,7 +109,7 @@ class EventController extends Controller
         $events = [];
         $ids = $request->ids;
         if(!is_null($ids)){
-            $events = Event::whereIn('id', $ids )->orderBy('date' , 'desc')->get();
+            $events = Event::whereIn('id', $ids )->orderBy('date' , 'asc')->get();
           
         }
         return response()->json($events);
