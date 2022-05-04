@@ -61,19 +61,32 @@ class EventController extends Controller
 
     public function search(Request $request){
         
-        $q = $request->name;
+    /*     $q = $request->name;
         $start = $request->start;
         $end = $request->end;
         if((!is_null($q)) && (is_null($start) || is_null($end))){
             $events = Event::where('name','LIKE','%'.$q.'%')->orderBy('created_at' , 'desc')->get();
         } elseif((is_null($q)) && (!is_null($start) && !is_null($end))){
             $events = Event::whereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
-            foreach ($events as $event){
+           /*  foreach ($events as $event){
                 if($event->periodic == 1){
                     $event = Event::whereRaw('DATE_FORMAT(date , \'%m-%d\') BETWEEN DATE_FORMAT( \'' .$start. '\', \'%m-%d\') AND DATE_FORMAT( \'' .$end. '\'  , \'%m-%d\')')->orderBy('created_at' , 'desc')->get();
                 }
-            }
+            }  
         } 
+        else {
+            $events = Event::where('name','LIKE','%'.$q.'%')->orWhereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
+        }*/
+         $events = [];
+        $ids = $request->ids;
+        $q = $request->name;
+        $start = $request->start;
+        $end = $request->end;
+        if((!is_null($q)) && (is_null($start) || is_null($end)) && (!is_null($ids))){
+            $events = Event::where('name','LIKE','%'.$q.'%')->orderBy('created_at' , 'desc')->get();
+        } elseif((is_null($q)) && (!is_null($start) && !is_null($end))){
+            $events = Event::whereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
+        }
         else {
             $events = Event::where('name','LIKE','%'.$q.'%')->orWhereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
         }

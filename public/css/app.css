@@ -11453,5 +11453,6 @@ textarea.form-control-lg {
 
   .my-background{
     background: rgb(32, 173, 220);
+    border-radius: 15px !important;
   }
 
