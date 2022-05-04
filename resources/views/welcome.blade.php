@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset("css/app.css")}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>window.basePath = '{{ url('/') }}/';</script>
+    
     <title>Agenda</title>
     
 </head>
@@ -58,9 +58,6 @@
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="q"
                                                     placeholder="Cerca nome evento"> <span class="input-group-btn">
-                                                    <!-- <button type="submit" class="btn btn-default">
-                                                        <span class="glyphicon glyphicon-search"></span>
-                                                    </button> -->
                                                 </span>
                                             </div>
                                         </div>

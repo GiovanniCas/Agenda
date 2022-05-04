@@ -113,7 +113,7 @@ $(function() {
 $(function() {
    $(document).on('click' ,'.card-clipboard', function(){
       let copyName = $(this).parents('.card-box').find('.card-name');
-      console.log(copyName);
+     
       let copyDate = $(this).parents('.card-box').find('.card-date');
       
       navigator.clipboard.writeText(copyName.data('value') + ' - ' + copyDate.data('value'));
@@ -232,6 +232,7 @@ $(function(){
          
          success: function(data) {
             $('.card-holder').html('');
+            $('.card-holder').append(`<h1 class="mt-3">Eventi In Programma:</h1>`)
             $.each(data, function () {
                $('.card-holder').append(` 
                
@@ -328,7 +329,7 @@ $(function(){
          
          
          success: function(data) {
-            console.log('ciao');
+            
             $(`#event-${eventid}`).remove();
          },
          error: function(jqXHR, textStatus, errorThrown) {

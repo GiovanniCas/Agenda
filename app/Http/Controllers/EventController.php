@@ -82,9 +82,10 @@ class EventController extends Controller
         $q = $request->name;
         $start = $request->start;
         $end = $request->end;
-        if((!is_null($q)) && (is_null($start) || is_null($end)) && (!is_null($ids))){
+        if((!is_null($q)) && (is_null($start) || is_null($end)) && (is_null($ids))){
+            
             $events = Event::where('name','LIKE','%'.$q.'%')->orderBy('created_at' , 'desc')->get();
-        } elseif((is_null($q)) && (!is_null($start) && !is_null($end)) && (!is_null($ids))){
+            } elseif((is_null($q)) && (!is_null($start) && !is_null($end)) ){
             $events = Event::whereBetween('date', [$start , $end])->orderBy('created_at' , 'desc')->get();
         }
         else {
